@@ -13,7 +13,16 @@
 
     <section>
         <h3>Ingredients</h3>
-        {{ recipe.ingredients|markdown }}
+		{# XXX: The double related managers is going to hurt with lots of entries, but works for now. #}
+		{% for ingredients in recipe.ingredients_set.all %}
+			{% if ingredients.name %}{{ ingredients.name }}{% endif %}
+			<ul>
+			{% for ingredient in ingredients.ingredient_set.all %}
+				<li>{{ ingredient }}</li>
+			{% endfor %}
+			</ul>
+			{% if ingredients.note %}{{ ingredients.note|markdown }}{% endif %}
+		{% endfor %}
     </section>
 
     <section>
