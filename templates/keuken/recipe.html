@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{# XXX: deprecated module #}
+{% load markup %}
+
+{% block subtitle %} - {{ recipe.name }}{% endblock %}
+
+{% block content %}
+
+<article>
+    <h2>{{ recipe.name }}</h2>
+    <span class="author">by <a href="{% url 'keuken:recipes_by_author' recipe.author.username %}">{{ recipe.author }}</a></span>
+
+    <section>
+        <h3>Ingredients</h3>
+        {{ recipe.ingredients|markdown }}
+    </section>
+
+    <section>
+        <h3>Directions</h3>
+        {{ recipe.directions|markdown }}
+    </section>
+</article>
+
+{% endblock %}
